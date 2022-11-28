@@ -8,6 +8,7 @@ import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import { useState, useEffect } from "react";
+import {addToAddress} from "../services/dataservices";
 
 const useStyle= makeStyles({
     addressmain:{
@@ -53,7 +54,7 @@ const useStyle= makeStyles({
         // border:'1px solid red',
         position:'relative',
         top:'50px',
-        right:'350px',
+        right:'325px',
     },
     dfour:{
         width:'60%',
@@ -64,7 +65,7 @@ const useStyle= makeStyles({
         alignContent:'space-between',
         justifyContent:'space-evenly',
         position:'relative',
-        top:'50px',
+        top:'60px',
         right:'90px',   
         textAlign:'left',
     },
@@ -132,6 +133,7 @@ const useStyle= makeStyles({
     space2:{
         height:'5vh',
     },
+    
 
 })
 
@@ -139,6 +141,27 @@ const useStyle= makeStyles({
 function Address(props) {
     const classes = useStyle()
     const [visible1, setVisible1] = useState(false)
+    const [type, setType] = useState("Home")
+
+   
+
+    // const addedAddress = () => {
+    //     let addressobj = {
+    //          isAdded: true
+    //     }
+    //     console.log(addressobj)
+    //     addToAddress().then(
+    //         (response) => {
+    //             console.log(response)
+    //             props.listenToDetails()
+    //             setVisible1(true)
+    //         }
+    //     ).catch(
+    //         (error) => {
+    //             console.log(error)
+    //         }
+    //     )
+    // }
 
     const oprnOrder=()=>{
         props.listenToDetails()
@@ -159,9 +182,28 @@ function Address(props) {
                         <TextField id="outlined-basic" label="Full Name" variant="outlined" size='small' />
                         <TextField id="outlined-basic" label="Mobile Number" variant="outlined" size='small'/>
                     </Box>
+                    <Box className={classes.deleven}>
+                        <Box>
+                            <span>Type</span>
+                        </Box>
+                        <Box className={classes.dnine}>
+                            <Box  className={classes.dten}>
+                                <input type="radio" name="Home" id="Home" value="Home" checked={type ==='Home'} onChange={(e)=>setType(e.target.value)}/>
+                                <lable style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> Home </lable>
+                            </Box>
+                            <Box className={classes.dten}>
+                                <input type="radio" name='Work' id='Work' value='Work' checked={type ==='Work'} onChange={(e)=>setType(e.target.value)}/>
+                                <lable style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> Work </lable>
+                            </Box>
+                            <Box className={classes.dten}>
+                                <input type="radio" name='other' id='other' value='other' checked={type ==='Other'} onChange={(e)=>setType(e.target.value)}/>
+                                <lable style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> other </lable>
+                            </Box>
+                        </Box>
+                        <Box className={classes.space2} ></Box>
+                    </Box>
                     <Box className={classes.dthree}>
-                        <FormControlLabel  value="one" control={<Radio />}  color="#A03037" />
-                        <span style={{font:'normal normal medium 15px/20px Roboto',color: '#0A0102'}}>1. Work </span> 
+                        <span style={{font:'normal normal medium 15px/20px Roboto',color: '#0A0102'}}>1. {type} </span> 
                         <span style={{font:'normal normal medium 12px/16px Roboto', color: '#A03037',  position:'relative',left:'50px'}}>Edit</span>
                     </Box>
                     <Box className={classes.dfour}>
@@ -183,26 +225,7 @@ function Address(props) {
                         <TextField id="outlined" placeholder="Maharashtra" variant="outlined" size='small' sx={{background:'#F5F5F5 0% 0% no-repeat padding-box',borderRadius: '2px',font:'normal normal normal 12px/16px Roboto'}}/>
                         </Box>
                     </Box>
-                    <Box className={classes.deleven}>
-                        <Box>
-                            <span>Type</span>
-                        </Box>
-                        <Box className={classes.dnine}>
-                            <Box  className={classes.dten}>
-                                <FormControlLabel value="Two" control={<Radio />} />
-                                <span style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> Home </span>
-                            </Box>
-                            <Box className={classes.dten}>
-                                <FormControlLabel value="Two" control={<Radio />} />
-                                <span style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> Work </span>
-                            </Box>
-                            <Box className={classes.dten}>
-                                <FormControlLabel value="Two" control={<Radio />} />
-                                <span style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> other </span>
-                            </Box>
-                        </Box>
-                
-                    </Box>
+                    
                     
                     <Box  className={classes.deight}>
                         {

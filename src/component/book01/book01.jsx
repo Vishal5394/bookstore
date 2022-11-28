@@ -265,6 +265,7 @@ function Book01(props) {
   }
 
   console.log(props.name)
+
   
   const decNum = () =>{
     let value={
@@ -282,12 +283,8 @@ function Book01(props) {
   }
 
   const get_counter = ()=> {
-    let value={
-        quantityToBuy:count
-    }
-    let id = {
-        cartItem_id: props.id
-    }
+    let value
+    let id 
     getCounter(id, value).then((response) => {
             console.log(response)
             setCounter(response.data.result)

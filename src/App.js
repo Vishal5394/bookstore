@@ -10,7 +10,9 @@ import Counter from './component/counter';
 import Cart from './component/cart/cart';
 import Address from './component/cart/address';
 import Order from './component/cart/order';
-import Router from './component/router/router'
+import Router from './component/router/router';
+import Orderplaced from './component/orderplaced/orderplaced';
+import Wishlist from './component/wishlist/wishlist';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
       {/* <Address/> */}
       {/* <Order/> */}
       <Router/>
+      {/* <Orderplaced/> */}
+      {/* <Wishlist/> */}
      
     </div>
   );

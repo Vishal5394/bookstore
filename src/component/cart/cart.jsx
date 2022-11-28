@@ -56,7 +56,7 @@ const useStyle= makeStyles({
     mid:{
         width:'90%',
         height:'150px',
-        border: '1px solid #DBDBDB',
+        // border: '1px solid #DBDBDB',
         display: 'flex',
         flexDirection:'row',
         justifyContent:'space-evenly',
@@ -207,6 +207,9 @@ const useStyle= makeStyles({
     space2:{
         height:'5vh',
     },
+    space1:{
+        height:'3vh',
+    },
     Placed:{
         position:'relative',
         left:'300px',
@@ -224,18 +227,7 @@ function Cart(props) {
     const [bookcart, setBookCart] = useState([])
     const [booklist, setBooklist] = useState([])
 
-    // useEffect(()=>{
-    //     getCartList().then((response) => {
-    //         console.log(response)
-    //         setGet(response.data.result)
-    //     }
-    // ).catch(
-    //     (error) => {
-    //         console.log(error)
-    //     }  
-    // )
-    // console.log("getting cart data")
-    // },[])
+  
 
     const getCart = ()=> {
         getCartList().then((response) => {
@@ -302,7 +294,7 @@ function Cart(props) {
     return (
         
         <Paper  elevation={0} className={classes.cart}>
-            {/* <Header/> */}
+            <Header/>
              <Box className={classes.space2} ></Box>
             <Box className={classes.cartmain}>
                 <Box className={classes.firstpart}>
@@ -364,14 +356,14 @@ function Cart(props) {
                 </Box> 
             </Box>
                 
-            <Box className={classes.space2}></Box>
+            <Box className={classes.space1}></Box>
             {/* <Box className={classes.add}> */}
                 { 
                 toggle ? <Address listenToDetails={listenToDetails} /> 
                  :<Box className={classes.add}> <span className={classes.add1} listenToDetailsone={listenToDetailsone}>Address Details</span> </Box>
                 }
             {/* </Box> */}
-            <Box className={classes.space2}></Box>
+            <Box className={classes.space1}></Box>
             {
                 toggle1 ? <Order listenToOrder={listenToOrder} />:
               <Box className={classes.summery}><span className={classes.order1} >Order summery</span></Box>

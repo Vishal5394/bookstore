@@ -13,6 +13,11 @@ export const addToCart = (id) => {
     return response
     console.log('from datasrvice ')
 }
+export const addToAddress = (id) => {
+    let response = axios.post(`https://bookstore.incubation.bridgelabz.com/bookstore_user/edit_user`, headerConfig)
+    return response
+    console.log('from datasrvice ')
+}
 
 export const getCartList = () => {
     let response = axios.get(`https://bookstore.incubation.bridgelabz.com/bookstore_user/get_cart_items`, headerConfig)
@@ -34,7 +39,7 @@ export const addToWishlist = (id) => {
 
 
     export const getWishlist = (id) => {
-        let response = axios.get(`https://bookstore.incubation.bridgelabz.com/bookstore_user/get_wishlist_items`,id, headerConfig)
+        let response = axios.get(`https://bookstore.incubation.bridgelabz.com/bookstore_user/get_wishlist_items`, headerConfig)
         return response
         console.log('from datasrvice ')
     }

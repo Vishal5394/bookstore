@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 import Button from '@mui/material/Button';
 import { useState, useEffect} from "react";
 import {getCartList} from '../services/dataservices'
+import {useNavigate} from "react-router-dom";
 
 const useStyle= makeStyles({
     orderhead:{
@@ -37,7 +38,7 @@ const useStyle= makeStyles({
         alignItems:'center',
         position:'relative',
         right:'0px',
-        border:'1px solid #DBDBDB',
+        // border:'1px solid #DBDBDB',
         textAlign:'left',
     },
     orderone:{
@@ -80,6 +81,11 @@ const useStyle= makeStyles({
 function Order(props) {
     const classes=useStyle()
     const [bookorder, setBookorder] = useState([])
+    const navigate = useNavigate()
+
+    const openOrder=()=>{
+        navigate('/placeorder')
+  }
    
     const getCart = ()=> {
         getCartList().then((response) => {
@@ -120,7 +126,7 @@ function Order(props) {
                     </Box>
                 </Box>))}
                 <Button variant="contained" sx={{background:' #3371B5 0% 0% no-repeat padding-box', borderRadius: '3px',
-                    position:'relative', left:'350px', top:'10px'}}>Checkout</Button>
+                    position:'relative', left:'350px', top:'10px'}} onClick={openOrder} >Checkout</Button>
                     <Box className={classes.space2} ></Box>
             </Box>
         </Paper>

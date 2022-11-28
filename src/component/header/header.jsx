@@ -111,11 +111,17 @@ function Header(props) {
   const [wishlist, setwishlist] = useState([]);
   const [detail, setDetails]=useState({});
   const [bookcart, setBookCart] = useState([])
+  const [visible, setVisible] = useState(false)
 
+ 
 
 
 const openCart=()=>{
       navigate('/cart')
+      setVisible(true)
+}
+const openwishlist=()=>{
+  navigate('/wishlist')
 }
 
 const get_wishlist = ()=> {
@@ -171,11 +177,11 @@ useEffect(() =>{
               <Button size="extra-large" aria-label="show 4 new mails" variant="contained"  color="inherit" sx={{backgroundColor:'#A03037'}}>
                   <PermIdentityOutlinedIcon sx={{ fontSize: 30  }} />
               </Button>
-              <Button size="large" aria-label="show 4 new mails" variant="contained"  color="inherit" sx={{backgroundColor:'#A03037'}}>
-                  <FavoriteIcon sx={{ fontSize: 30 }} onclick={get_wishlist}/>
+              <Button size="large" aria-label="show 4 new mails" variant="contained" onClick={openwishlist}  color="inherit" sx={{backgroundColor:'#A03037'}}>
+                  <FavoriteIcon   sx={{ fontSize: 30 }}/>
               </Button>
-                <Button size="large" color="inherit" variant="contained" sx={{backgroundColor:'#A03037'}}>
-                  <ShoppingCartOutlinedIcon sx={{ fontSize: 30 }} onClick={openCart} />
+                <Button size="large" color="inherit" variant="contained" sx={{backgroundColor:'#A03037'}} onClick={openCart}>
+                  <ShoppingCartOutlinedIcon sx={{ fontSize: 30 }}  />
                 </Button>
              
               
@@ -197,7 +203,10 @@ useEffect(() =>{
         {/* {renderMobileMenu}
         {renderMenu} */}
       </Box>
-      <Box className={classes.name}>Books</Box>
+      <Box>
+      { visible ? null :
+      <Box  onClick={openCart}>
+        <Box className={classes.name}>Books</Box>
              <FormControl   sx={{ m: 1, minWidth: 120 }} >
                 <Select className={classes.one}
                 value={sort}
@@ -209,7 +218,9 @@ useEffect(() =>{
                 </MenuItem>
                 </Select>
             </FormControl> 
+            </Box>}
             </Box>
+    </Box>
     );
 }
 

@@ -147,6 +147,8 @@ const useStyle = makeStyles({
         width: '80%',
         display: 'flex',
         flexDirection: 'column',
+        position:"relative",
+        top:'10px'
     },
 
     passwordp: {
