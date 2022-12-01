@@ -7,6 +7,8 @@ import { useState, useEffect} from "react";
 import {getWishlist} from '../services/dataservices'
 import DeleteIcon from '@mui/icons-material/Delete';
 import Header from '../header/header';
+import {RemoveBookFromWishlist} from '../services/dataservices';
+import Button from '@mui/material/Button';
 
 
 const useStyle= makeStyles({
@@ -21,7 +23,7 @@ const useStyle= makeStyles({
         // border:'1px solid red',
     },
     firstone:{
-        width:'60vw',
+        width:'70vw',
         height:'auto',
         border: '1px solid #DBDBDB',
         display:'flex',
@@ -50,7 +52,7 @@ const useStyle= makeStyles({
         // border: '1px solid green',
         textAlign:'left',
         position:'relative',
-        right:'100px',
+        right:'50px',
         font:' normal normal normal 18px/24px Roboto',
         color: '#0A0102',
         opacity: '1',
@@ -74,7 +76,7 @@ const useStyle= makeStyles({
         alignContent:'center',
         alignItems:'center',
         position:'relative',
-        right:'50px',
+        right:'20px',
 
     },
     wish:{
@@ -95,7 +97,15 @@ const useStyle= makeStyles({
 function Wishlist(props) {
     const classes=useStyle()
     const [bookwishlist, setBookwishlist] = useState([])
-  
+    
+
+    const removeBooks = (id) =>{
+        RemoveBookFromWishlist(id).then((response) =>{
+            console.log(response);
+        }).catch((error) =>{
+            console.log(error);
+        })
+    }
 
     const get_wishlist = ()=> {
         getWishlist().then((response) => {
@@ -118,6 +128,7 @@ function Wishlist(props) {
     return (
         <Paper className={classes.orderhead} elevation={0}>
             <Header/>
+            <Box className={classes.space2} ></Box>
         <Box className={classes.firstone}>
             
         <Box className={classes.space2} ></Box>
@@ -137,7 +148,7 @@ function Wishlist(props) {
                         <span style={{ font:' normal normal normal 12px/15px Lato',color: '#9D9D9D', textDecoration: 'line-through'}}>{book.product_id.price}</span>
                     </Box>
                 </Box>
-                <Box><DeleteIcon sx={{color:'#9D9D9D'}}/></Box>
+                <Button onClick={()=>removeBooks(book.product_id._id)}><DeleteIcon sx={{color:'#9D9D9D'}}/></Button>
             </Box>))}
             
                 <Box className={classes.space2} ></Box>

@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 
+
 const useStyle = makeStyles ({
    
 
@@ -126,7 +127,7 @@ function Books(props) {
     const handleChange = (event: SelectChangeEvent) => {
       setSort(event.target.value);
     };
-    console.log(props.book)
+    // console.log(props.book)
 
     
     
@@ -148,6 +149,7 @@ function Books(props) {
                         </span>
                         
                     </Box>
+                   
            </Box> 
            
          

@@ -8,7 +8,7 @@ import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import { useState, useEffect } from "react";
-import {addToAddress} from "../services/dataservices";
+import {putAddress} from "../services/dataservices";
 
 const useStyle= makeStyles({
     addressmain:{
@@ -142,31 +142,49 @@ function Address(props) {
     const classes = useStyle()
     const [visible1, setVisible1] = useState(false)
     const [type, setType] = useState("Home")
+    const[customerDetails,setCustomerDetails] = React.useState({addressType:'',fullAddress:'',city:'', state:''})
 
-   
-
-    // const addedAddress = () => {
-    //     let addressobj = {
-    //          isAdded: true
-    //     }
-    //     console.log(addressobj)
-    //     addToAddress().then(
-    //         (response) => {
-    //             console.log(response)
-    //             props.listenToDetails()
-    //             setVisible1(true)
-    //         }
-    //     ).catch(
-    //         (error) => {
-    //             console.log(error)
-    //         }
-    //     )
-    // }
-
-    const oprnOrder=()=>{
-        props.listenToDetails()
-        setVisible1(true)
+    const addedAddress = () => {
+        putAddress(customerDetails).then(
+            (response) => {
+                console.log(response ,"getting Details")
+                setVisible1(true)
+                props.listenToDetails()
+                
+            }
+        ).catch(
+            (error) => {
+                console.log(error)
+            }
+        )
     }
+
+
+    const takeAddress = (event) =>{
+        setCustomerDetails({...customerDetails,fullAddress:event.target.value})
+    }
+
+    const takeCity = (event) =>{
+        setCustomerDetails({...customerDetails,city:event.target.value})
+    }
+
+    const takeType = (event) =>{
+        setCustomerDetails (prevState=>({
+            ...prevState,
+            addressType: event.target.value
+        }))
+        // ({
+            // ...customerDetails,addressType:event.target.value})
+        console.log(event.target.value, "AddressType")
+    }
+    const takeState = (event) =>{
+        setCustomerDetails({...customerDetails,state:event.target.value})
+    }
+    console.log(customerDetails)
+    // const oprnOrder=()=>{
+    //     props.listenToDetails()
+    //     setVisible1(true)
+    // }
 
     return (
         <Paper elevation={0} className={classes.addressmain}>
@@ -179,24 +197,24 @@ function Address(props) {
                                         color: '#A03037',font: 'normal normal normal 12px/16px Roboto', border: '1px solid #A03037'}}>Add New address</Button>
                     </Box>
                     <Box className={classes.dtwo}>
-                        <TextField id="outlined-basic" label="Full Name" variant="outlined" size='small' />
-                        <TextField id="outlined-basic" label="Mobile Number" variant="outlined" size='small'/>
+                        <TextField  id="outlined-basic" label="Full Name" variant="outlined" size='small' />
+                        <TextField  id="outlined-basic" label="Mobile Number" variant="outlined" size='small'/>
                     </Box>
                     <Box className={classes.deleven}>
                         <Box>
                             <span>Type</span>
                         </Box>
-                        <Box className={classes.dnine}>
+                        <Box className={classes.dnine} onChange={takeType}>
                             <Box  className={classes.dten}>
-                                <input type="radio" name="Home" id="Home" value="Home" checked={type ==='Home'} onChange={(e)=>setType(e.target.value)}/>
+                                <input type="radio" name="type" key="1" id="Home" value="Home"  />
                                 <lable style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> Home </lable>
                             </Box>
                             <Box className={classes.dten}>
-                                <input type="radio" name='Work' id='Work' value='Work' checked={type ==='Work'} onChange={(e)=>setType(e.target.value)}/>
-                                <lable style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> Work </lable>
+                                <input type="radio" name='type' id='Office' value='Office' key="2" />
+                                <lable style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> Office</lable>
                             </Box>
                             <Box className={classes.dten}>
-                                <input type="radio" name='other' id='other' value='other' checked={type ==='Other'} onChange={(e)=>setType(e.target.value)}/>
+                                <input type="radio" name='type' id='other' value='Other' key="3" />
                                 <lable style={{font: 'normal normal medium 15px/20px Roboto',color: '#0A0102'}}> other </lable>
                             </Box>
                         </Box>
@@ -209,27 +227,28 @@ function Address(props) {
                     <Box className={classes.dfour}>
                         <span style={{font: 'normal normal normal 12px/16px Roboto',color: '#0A0102'}}>Address</span>
                         <TextareaAutosize
+                         onChange={takeAddress} 
                             aria-label="empty textarea"
-                            placeholder="BridgeLabz Solutions LLP, No. 42, 14th Main, 15th Cross, Sector 4,
-                            Opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore"
-                            style={{ width: 550, height:60, background:' #F5F5F5 0% 0% no-repeat padding-box', font: 'normal normal normal 12px/16px Roboto',color: '#878787' }}
+                            key="7"
+                            placeholder=""
+                            style={{ width: 550, height:60, background:' #F5F5F5 0% 0% no-repeat padding-box', font:'normal normal normal 15px/18px Roboto',color: '#0A0102' }}
                             />
                     </Box>
                     <Box className={classes.dfive}>
                         <Box className={classes.dsix}>
-                        <span style={{font: 'normal normal normal 12px/16px Roboto',color: '#0A0102'}}>City/Town</span>
-                        <TextField id="outlined" placeholder='Pune' variant="outlined" size='small'  style={{background:'#F5F5F5 0% 0% no-repeat padding-box',borderRadius: '2px',font:'normal normal normal 12px/16px Roboto'}}/>
+                        <span   style={{font: 'normal normal normal 12px/16px Roboto',color: '#0A0102'}}>City/Town</span>
+                        <TextField onChange={takeCity} id="outlined" placeholder='' variant="outlined" size='small' key="5"  style={{background:'#F5F5F5 0% 0% no-repeat padding-box',borderRadius: '2px',font:'normal normal normal 12px/16px Roboto'}}/>
                         </Box>
                         <Box className={classes.dseven}>
                         <span style={{font: 'normal normal normal 12px/16px Roboto',color: '#0A0102'}}>State</span>
-                        <TextField id="outlined" placeholder="Maharashtra" variant="outlined" size='small' sx={{background:'#F5F5F5 0% 0% no-repeat padding-box',borderRadius: '2px',font:'normal normal normal 12px/16px Roboto'}}/>
+                        <TextField   onChange={takeState} id="outlined" placeholder="" variant="outlined" size='small' key="6" sx={{background:'#F5F5F5 0% 0% no-repeat padding-box',borderRadius: '2px',font:'normal normal normal 12px/16px Roboto'}}/>
                         </Box>
                     </Box>
                     
                     
                     <Box  className={classes.deight}>
                         {
-                            visible1 ? null : <Button variant="contained" onClick={oprnOrder} sx={{background:' #3371B5 0% 0% no-repeat padding-box', borderRadius: '3px'}}>Continue</Button>
+                            visible1 ? null : <Button variant="contained" onClick={addedAddress} sx={{background:' #3371B5 0% 0% no-repeat padding-box', borderRadius: '3px'}}>Continue</Button>
                         }
                         
                     </Box>

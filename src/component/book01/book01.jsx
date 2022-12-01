@@ -14,7 +14,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {addToWishlist} from "../services/dataservices";
-import { getCounter } from '../services/dataservices'; 
+import { UpdateCart } from '../services/dataservices'; 
 import { addToCart } from '../services/dataservices';
 import { useEffect, useState } from "react";
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
@@ -252,52 +252,38 @@ function Book01(props) {
     const [counter, setCounter] = useState([]);
     const [cart, setCart] = useState([]);
 
-    
-    
-  const incNum = () =>{
-    let value={
-        quantityToBuy:count
-    }
-    let id = {
-        cartItem_id: props.id
-    }
-      setCount(count+1);
-  }
-
-  console.log(props.name)
-
-  
-  const decNum = () =>{
-    let value={
-        quantityToBuy:count
-    }
-    let id = {
-        cartItem_id: props.id
-    }
-      if (count > 1){
-          setCount(count-1);
-      } else {
-          setCount(1);
-      }
-
-  }
-
-  const get_counter = ()=> {
-    let value
-    let id 
-    getCounter(id, value).then((response) => {
-            console.log(response)
-            setCounter(response.data.result)
+    const MinusQuantity = () =>{
+        let input = {
+            quantityToBuy: count-1,
         }
-    ).catch(
-        (error) => {
-            console.log(error)
-        }  
-    )
-    console.log("getting data")
-  }
-  
-  console.log(counter)
+        if (count > 1){
+            setCount(count-1);
+        } else {
+                setCount(1);
+        }
+        UpdateCart(props.id, input).then((response) =>{
+            console.log(response);
+            
+        }).catch((error) =>{
+            console.log(error);
+        })
+        console.log(input,"Input")
+    }
+
+    const PlusQuantity = () =>{
+        
+        let input = {
+            quantityToBuy: count+1,
+        }
+        setCount(count+1);
+        UpdateCart(props.id,input).then((response) =>{
+            console.log(response);
+            
+        }).catch((error) =>{
+            console.log(error);
+        })
+        console.log(input,"Input")
+    }
 
   const listenToCounter = ()=>{
     setToggle(false)
@@ -312,11 +298,11 @@ function Book01(props) {
         console.log(response)
         setCart(response.data.result)
     }
-).catch(
-    (error) => {
-        console.log(error)
-    }  
-)
+    ).catch(
+        (error) => {
+            console.log(error)
+        }  
+    )
   }
 
   const addedWishlist = (id) => {
@@ -342,21 +328,21 @@ function Book01(props) {
             <Box className={classes.childTwo}>
                 <img className={classes.imgOne} src={img} alt="img" width='80%' height='80%'/>
                 {
-                toggle ? (
-                            <Box className={classes.mindiv} listenToCounter={listenToCounter} onClick={get_counter} >
+                // toggle ? (
+                            <Box className={classes.mindiv} listenToCounter={listenToCounter}  >
                                 <Box className={classes.buttondiv}>
-                                <Box size="large" color="#DBDBDB" aria-label="add"  sx={{ width:'100px', height:'80px'}}  >
-                                    <RemoveCircleOutlinedIcon onClick={decNum} sx={{ width:'60px', height:'40px'}} />
+                                <Box  id ={props.productId}  onClick={MinusQuantity} size="large" color="#DBDBDB" aria-label="add"  sx={{ width:'100px', height:'80px'}}  >
+                                    <RemoveCircleOutlinedIcon  sx={{ width:'60px', height:'40px'}} />
                                 </Box>
                                      <span className={classes.num}>{count}</span>
-                                <Box size="large" color="#DBDBDB" aria-label="substract" sx={{ width:'100px', height:'80px'}} >
-                                    <AddCircleOutlinedIcon onClick={incNum} sx={{ width:'60px', height:'40px'}}/>
+                                <Box   id ={props.productId} onClick={PlusQuantity}  size="large" color="#DBDBDB" aria-label="substract" sx={{ width:'100px', height:'80px'}} >
+                                    <AddCircleOutlinedIcon sx={{ width:'60px', height:'40px'}}/>
                                 </Box>
                                 </Box>
                             </Box>
-                 ) :
+                //  ) :
                          
-                        <Button variant="contained"  sx={{backgroundColor:'#b71c1c'}} onClick={openCounter} >ADD TO BAG </Button>
+                        // <Button variant="contained"  sx={{backgroundColor:'#b71c1c'}} onClick={openCounter} >ADD TO BAG </Button>
                          
                 }
                 <Button variant="contained" sx={{backgroundColor:'#212121', height:'40px'}} onClick={()=> addedWishlist(props.id)}><FavoriteIcon /> WISHLIST</Button>

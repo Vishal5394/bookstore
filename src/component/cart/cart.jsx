@@ -18,6 +18,8 @@ import {getCartList} from '../services/dataservices'
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
 import Header from '../header/header';
+import {RemoveBookFromCart} from '../services/dataservices'
+import {UpdateCart} from '../services/dataservices'
 
 const useStyle= makeStyles({
     cart:{
@@ -227,7 +229,48 @@ function Cart(props) {
     const [bookcart, setBookCart] = useState([])
     const [booklist, setBooklist] = useState([])
 
-  
+
+    const removeBook = (id) =>{
+        RemoveBookFromCart(id).then((response) =>{
+            console.log(response);
+        }).catch((error) =>{
+            console.log(error);
+        })
+    }
+
+
+    const MinusQuantity = (id, quantity) =>{
+        let input = {
+            quantityToBuy: quantity-1,
+        }
+        if (quantity > 1){
+            setCount(quantity-1);
+        } else {
+                setCount(1);
+        }
+        UpdateCart(id, input).then((response) =>{
+            console.log(response);
+            
+        }).catch((error) =>{
+            console.log(error);
+        })
+        console.log(input,"Input")
+    }
+
+    const PlusQuantity = (id, quantity) =>{
+        
+        let input = {
+            quantityToBuy: quantity+1,
+        }
+        setCount(quantity+1);
+        UpdateCart(id,input).then((response) =>{
+            console.log(response);
+            
+        }).catch((error) =>{
+            console.log(error);
+        })
+        console.log(input,"Input")
+    }
 
     const getCart = ()=> {
         getCartList().then((response) => {
@@ -249,18 +292,18 @@ function Cart(props) {
         getCart()
     }, [])
 
-    const incNum = () =>{
-        setCount(count+1);
-    }
+    // const incNum = () =>{
+    //     setCount(count+1);
+    // }
     
-    const decNum = () =>{
-        if (count > 1){
-            setCount(count-1);
-        } else {
-            setCount(1);
-        }
+    // const decNum = () =>{
+    //     if (count > 1){
+    //         setCount(count-1);
+    //     } else {
+    //         setCount(1);
+    //     }
   
-    }
+    // }
 
         const [locate, setLocate] = React.useState('');
       
@@ -334,15 +377,15 @@ function Cart(props) {
                                     <div className={classes.mindiv} >
                                             <div className={classes.buttondiv}>
                                                 <Box size="small" color="#DBDBDB" aria-label="add"  sx={{ width:'30px', height:'20px', }}  >
-                                                <RemoveCircleOutlinedIcon onClick={decNum} />
+                                                <RemoveCircleOutlinedIcon onClick={()=>MinusQuantity(book._id,book.quantityToBuy)} />
                                                 </Box>
-                                                    <span className={classes.num}>{count}</span>
+                                                    <span className={classes.num}>{book.quantityToBuy}</span>
                                                 <Box size="small" color="#DBDBDB" aria-label="substract" sx={{ width:'30px', height:'20px'}} >
-                                                <AddCircleOutlinedIcon onClick={incNum}/>
+                                                <AddCircleOutlinedIcon onClick={()=>PlusQuantity(book._id,book.quantityToBuy)}/>
                                                 </Box>
                                             </div>
                                     </div>
-                                    <span className={classes.h2}>Remove</span>
+                                    <Button className={classes.h2}  onClick={()=>removeBook(book._id)}>Remove</Button>
                                 </Box>
                             </Box>
                         </Box>))}

@@ -13,6 +13,7 @@ import Order from './component/cart/order';
 import Router from './component/router/router';
 import Orderplaced from './component/orderplaced/orderplaced';
 import Wishlist from './component/wishlist/wishlist';
+import Head from './component/header/head';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Router/>
       {/* <Orderplaced/> */}
       {/* <Wishlist/> */}
+      {/* <Head/> */}
      
     </div>
   );

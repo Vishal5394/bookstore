@@ -31,28 +31,8 @@ import Cart from '../cart/cart';
 import { getCartList } from '../services/dataservices'; 
 import {useNavigate} from "react-router-dom";
 import {addToCart} from "../services/dataservices";
+import Head from "./head"
 
-const useStyle = makeStyles ({
-      one: {
-        width:'200px',
-        height:'30px',
-        // border: '1px solid red',
-        position:'relative',
-        top:"-20px",
-        left:"410px",
-    },
-    name:{
-        // border: '1px solid red',
-        textAlign: 'left',
-        font: 'normal normal normal 25px/33px Roboto',
-        letterSpacing: '0px',
-        color: '#0A0102',
-        opacity: '1',
-        position:'relative',
-        left:"200px",
-        top:'20px',
-    },
-})
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -106,7 +86,6 @@ const Search = styled('div')(({ theme }) => ({
 
 function Header(props) {
   const navigate = useNavigate()
-  const classes = useStyle()
   const [sort, setSort] = React.useState('');
   const [wishlist, setwishlist] = useState([]);
   const [detail, setDetails]=useState({});
@@ -158,7 +137,7 @@ useEffect(() =>{
               noWrap
               component="div"
               sx={{ display: { xs: 'none', sm: 'flex' },width:'150px',
-              justifyContent:'space-evenly', position: 'relative', left:'150px' }}
+              justifyContent:'space-evenly', position: 'relative', left:'190px' }}
             >   
              <img src={img} alt="img"  sx={{ width:'30px', height:'20px', position:'relative', right:'50px'}}/>
               Bookstore
@@ -173,7 +152,7 @@ useEffect(() =>{
               />
             </Search>
             <Box sx={{ flexGrow: 1, }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent:'space-between', position: 'relative' , right: '220px', width:'250px',border:'0px solid green'  }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent:'space-between', position: 'relative' , right: '200px', width:'250px',border:'0px solid green'  }}>
               <Button size="extra-large" aria-label="show 4 new mails" variant="contained"  color="inherit" sx={{backgroundColor:'#A03037'}}>
                   <PermIdentityOutlinedIcon sx={{ fontSize: 30  }} />
               </Button>
@@ -203,25 +182,10 @@ useEffect(() =>{
         {/* {renderMobileMenu}
         {renderMenu} */}
       </Box>
-      <Box>
-      { visible ? null :
-      <Box  onClick={openCart}>
-        <Box className={classes.name}>Books</Box>
-             <FormControl   sx={{ m: 1, minWidth: 120 }} >
-                <Select className={classes.one}
-                value={sort}
-                onChange={handleChange}
-                displayEmpty
-                inputProps={{ 'aria-label': 'Without label' }}>
-                <MenuItem value="">
-                    <em>sort by relevance</em>
-                </MenuItem>
-                </Select>
-            </FormControl> 
-            </Box>}
-            </Box>
+           
     </Box>
     );
+    
 }
 
 export default Header;

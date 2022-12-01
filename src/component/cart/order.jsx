@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { useState, useEffect} from "react";
 import {getCartList} from '../services/dataservices'
 import {useNavigate} from "react-router-dom";
+import {addToOrder} from '../services/dataservices'
 
 const useStyle= makeStyles({
     orderhead:{
@@ -79,18 +80,46 @@ const useStyle= makeStyles({
 })
 
 function Order(props) {
-    const classes=useStyle()
-    const [bookorder, setBookorder] = useState([])
+    const classes=useStyle();
+    const [bookorder, setBookorder] = useState([]);
+    const [orderList, setOrderList] = useState([]);
     const navigate = useNavigate()
 
-    const openOrder=()=>{
-        navigate('/placeorder')
-  }
+    const onOrderPlace = () => {
+    let orderList =[];
+    for (let i=0; i<bookorder.length;i++){
+        let inOrderonj = {
+            "product_id": bookorder[i].product_id._id,
+            "product_name":bookorder[i].product_id.bookName,
+            "product_quantity": bookorder[i].quantityToBuy,
+            "product_price": bookorder[i].product_id.discountPrice,
+        };
+        orderList.push(inOrderonj);
+    }
+    console.log("order data", orderList);
+    const orderObj = {orders: orderList} 
+        addToOrder(orderObj).then(
+            (response) => {
+                console.log(response)
+                navigate('/placeorder')
+            }
+        ).catch(
+            (error) => {
+                console.log(error)
+            }
+        )
+        console.log("order placed...");
+    };
+
+//     const openOrder=()=>{
+//         navigate('/placeorder')
+//   }
    
     const getCart = ()=> {
         getCartList().then((response) => {
-                console.log(response)
-                setBookorder(response.data.result)
+                console.log(response);
+                setBookorder(response.data.result);
+                setOrderList(response.data.result);
             }
         ).catch(
             (error) => {
@@ -104,29 +133,30 @@ function Order(props) {
     useEffect(() =>{
         getCart()
     }, [])
+
     return (
         <Paper className={classes.orderhead}>
             
             <Box className={classes.firstone}>
-            <Box className={classes.space2} ></Box>
+            <Box className={classes.space2} key="9"></Box>
                 <span style={{position:'relative', right:'350px'}}>Order Summary</span>
                 <Box className={classes.space2} ></Box>
                 { bookorder.map((book)=>
                 (<Box className={classes.ordermain} book={book}>
                     <Box className={classes.image}>
-                    <img  src={img} alt="img" width='90%' height='90%'style={{position:'relative',top:'8px'}}/>
+                    <img key="12" src={img} alt="img" width='90%' height='90%'style={{position:'relative',top:'8px'}}/>
                     </Box>
                     <Box className={classes.orderone}>
-                        <span style={{ font:' normal normal normal 16px/20px Lato',color: '#0A0102',}}>{book.product_id.bookName}</span>
-                        <span style={{ font:' normal normal normal 13px/16px Lato',color: '#9D9D9D',}}>{book.product_id.author}</span>
+                        <span style={{ font:' normal normal normal 16px/20px Lato',color: '#0A0102',}} key="11">{book.product_id.bookName}</span>
+                        <span style={{ font:' normal normal normal 13px/16px Lato',color: '#9D9D9D',}} key="14">{book.product_id.author}</span>
                         <Box className={classes.costone}>
-                            <span style={{ font:' normal normal normal 15px/18px Lato',color: '#0A0102',}}>{book.product_id.discountPrice}</span> 
-                            <span style={{ font:' normal normal normal 12px/15px Lato',color: '#9D9D9D', textDecoration: 'line-through'}}>{book.product_id.price}</span>
+                            <span style={{ font:' normal normal normal 15px/18px Lato',color: '#0A0102',}} key="15">{book.product_id.discountPrice}</span> 
+                            <span style={{ font:' normal normal normal 12px/15px Lato',color: '#9D9D9D', textDecoration: 'line-through',}} key="16">{book.product_id.price}</span>
                         </Box>
                     </Box>
                 </Box>))}
                 <Button variant="contained" sx={{background:' #3371B5 0% 0% no-repeat padding-box', borderRadius: '3px',
-                    position:'relative', left:'350px', top:'10px'}} onClick={openOrder} >Checkout</Button>
+                    position:'relative', left:'350px', top:'10px'}} onClick={onOrderPlace} >Checkout</Button>
                     <Box className={classes.space2} ></Box>
             </Box>
         </Paper>
