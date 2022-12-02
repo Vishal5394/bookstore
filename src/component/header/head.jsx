@@ -32,6 +32,58 @@ const useStyle = makeStyles ({
       opacity: '1',
  
   },
+  ['@media only screen and (min-width :320px) and (max-width :480px)']:{
+    box:{
+      // border: '1px solid red',
+      width:'80%',
+      display:'flex',
+      justifyContent:'space-between',
+      alignItems:'center',
+      alignContent: 'space-between',
+      position:'relative',
+        left:"10%",
+  },
+
+  },
+  ['@media only screen and (min-width :481px) and (max-width :768px)']:{
+    box:{
+      // border: '1px solid red',
+      width:'80%',
+      display:'flex',
+      justifyContent:'space-between',
+      alignItems:'center',
+      alignContent: 'space-between',
+      position:'relative',
+      left:"10%",
+  },
+
+  },
+  ['@media only screen and (min-width :768px) and (max-width :899px)']:{
+    box:{
+      // border: '1px solid red',
+      width:'80%',
+      display:'flex',
+      justifyContent:'space-between',
+      alignItems:'center',
+      alignContent: 'space-between',
+      position:'relative',
+      left:"10%",
+  },
+
+  },
+  ['@media only screen and (min-width :900px) and (max-width :1024px)']:{
+    box:{
+      // border: '1px solid red',
+      width:'80%',
+      display:'flex',
+      justifyContent:'space-between',
+      alignItems:'center',
+      alignContent: 'space-between',
+      position:'relative',
+      left:"10%",
+  },
+
+  },
 })
 
 function Head() {

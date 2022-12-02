@@ -38,13 +38,13 @@ const useStyle = makeStyles ({
         alignItem:'center',
         position:'relative',
         top:'70px',
-        left:'50px',
+        left:'5%',
         
         // border:'1px solid red',
 
     },
 
-    childTwo:{
+    child2:{
         width:'50%',
         height:'85%',
         display:'flex',
@@ -54,12 +54,15 @@ const useStyle = makeStyles ({
         alignItem:'center',
         alignContent:'space-between',
         alignItem:'center',
-        // border:'1x solid green',
+        border:'1x solid Red',
+    },
+    wish:{
+        border:'1px solid red',
     },
 
     imgOne: {
-        width:'15vw',
-        height:'40vh',
+        width:'75%',
+        height:'70%',
         padding:'20px',
         border:'1px solid #E2E2E2',
         position:'relative',
@@ -89,7 +92,7 @@ const useStyle = makeStyles ({
         width:'40vw',
         height:'90vh',
         position:'relative',
-        left:'-20px',
+        left:'2%',
         top:'70px',
         // border:'1px solid red',
     },
@@ -182,7 +185,7 @@ const useStyle = makeStyles ({
         top:'10px',
     },
     mindiv:{
-        width:'150px',
+        width:'40%',
         height:'50px',
         // border:'1px solid red',
         display:'flex',
@@ -192,7 +195,7 @@ const useStyle = makeStyles ({
         alignItem:'center',
     },
     buttondiv: {
-        width:'180px',
+        width:'100%',
         height:'50px',
         display: 'flex',
         flexDirection:'row',
@@ -201,7 +204,7 @@ const useStyle = makeStyles ({
         // border:'1px solid #DBDBDB',
     },
     count:{
-        width:'100px',
+        width:'30%',
         height:'50px',
         // border:'2px solid #DBDBDB',
         // borderRadius:'1px',
@@ -228,8 +231,8 @@ const useStyle = makeStyles ({
         textAlign:'center',
     },
     num:{
-        width:'120px',
-        height:'40px',
+        // width:'50%',
+        // height:'40px',
         position:'relative',
         border:'1px solid #DBDBDB', 
         display: 'flex',
@@ -239,6 +242,124 @@ const useStyle = makeStyles ({
         alignItem:'center',  
        fontSize:'30px',
     },
+    ['@media only screen and (min-width :32px) and (max-width :480px)']:{
+        bookOne: {
+            display:'flex',
+            flexDirection:'COLUMN',
+            position:"relative",
+            top:'-80px',
+            right:'20px',
+        },
+       
+        bookchild:{
+            width:'100Vw',
+            height:'70vh',
+            display:'flex',
+            flexDirection:'row',
+            justifyContent:'Center',
+            alignContent:'center',
+            alignItem:'center',
+            position:'relative',
+            top:'70px',
+            left:'2%',
+            
+            // border:'1px solid red',
+    
+        },
+        child2:{
+            width:'100%',
+            height:'100%',
+            display:'flex',
+            flexWrap: 'wrap',
+            flexDirection:'row',
+            justifyContent:'space-evenly',
+            alignItem:'center',
+            alignContent:'space-between',
+            alignItem:'center',
+            border:'1x solid green',
+        },
+        imgOne: {
+            width:'75%',
+            height:'70%',
+            padding:'20px',
+            border:'1px solid #E2E2E2',
+            position:'relative',
+            top:'30px',
+            display:'flex',
+            flexDirection:'coloumn',
+    
+        },
+        childThree:{
+            width:'75%',
+            height:'90vh',
+            position:'relative',
+            left:'15%',
+            top:'70px',
+            // border:'1px solid red',
+        },
+        boxOne:{
+            width:'40%',
+            height:'30%',
+            display:'flex',
+            flexWrap:'wrap',
+            flexDirection:'column',
+            justifyContent:'space-between',
+            alignItems:'flex-start',
+            // border:'1px solid red',
+            lineHeight:'1.6',
+            textAlign: 'left',
+        },
+        h1:{
+            textAlign: 'left',
+            fontFamily: 'Roboto',
+            fontWeight:'regular',
+            fontSize:'20px',
+            color: '#0A0102',
+            lineSpacing:'37px',
+            opacity: '1',
+        },
+        h6 : {
+            textAlign: 'left',
+            fontFamily: 'Roboto',
+            fontWeight:'regular',
+            fontSize:'10px',
+            color: '#878787',
+            lineSpacing:'24px',
+            opacity: '1',
+        },
+        h5:{
+            background: '#388E3C 0% 0% no-repeat padding-box',
+            borderRadius: '1px',
+            // opacity: '1',
+            width:'40px',
+            height:'18px',
+            fontSize:'8px',
+            color:'#fff',
+            textAlign:'center',
+        },
+        h4:{
+            textAlign: 'left',
+            font: 'normal normal normal 8px/10px Roboto',
+            letterSpacing: '0px',
+            color: '#878787',
+            opacity: '1',
+           fontSize:'15px',
+        },
+        h3:{
+            fontFamily: 'Roboto',
+            fontWeight:'regular',
+            fontSize:'20px',
+            color: '#0A0102',
+        },
+        h2: {
+            textDecoration: 'line-through',
+            fontFamily: 'Roboto',
+            fontWeight:'regular',
+            fontSize:'13px',
+            color: '#878787',
+        },
+       
+      }
     
 })
 
@@ -325,7 +446,7 @@ function Book01(props) {
             <Box className={classes.bookchild}>
             <img className={classes.imgTwo} src={img1} alt="img" width='35px' height='47px'/>
             <img className={classes.imgThree} src={img2} alt="img" width='35px' height='47px'/>
-            <Box className={classes.childTwo}>
+            <Box className={classes.child2}>
                 <img className={classes.imgOne} src={img} alt="img" width='80%' height='80%'/>
                 {
                 // toggle ? (
@@ -345,7 +466,7 @@ function Book01(props) {
                         // <Button variant="contained"  sx={{backgroundColor:'#b71c1c'}} onClick={openCounter} >ADD TO BAG </Button>
                          
                 }
-                <Button variant="contained" sx={{backgroundColor:'#212121', height:'40px'}} onClick={()=> addedWishlist(props.id)}><FavoriteIcon /> WISHLIST</Button>
+                <Button variant="contained" sx={{backgroundColor:'#212121', height:'10%', width:'40%'}} onClick={()=> addedWishlist(props.id)}><FavoriteIcon /> WISHLIST</Button>
             </Box>
             </Box>
             <Box className={classes.childThree}>
@@ -378,7 +499,7 @@ function Book01(props) {
                     <Typography component="legend" sx={{position:'relative', left:'20px'}}>Overall rating</Typography>
                     <Rating name="no-value" value={null} sx={{position:'relative', left:'20px'}}/> 
                     <Textarea label="Soft" placeholder="Write Your Review..." variant="soft" sx={{backgroundColor:"White", width:'90%',position:'relative', left:'30px', top:'10px'}}/>
-                    <Button variant="contained" sx={{position:'relative', left:'500px', top:'20px'}}>Submit</Button>
+                    <Button variant="contained" sx={{position:'relative', left:'78%', top:'10%'}}>Submit</Button>
                     </Box>
                 </Box>
 

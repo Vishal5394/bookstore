@@ -117,7 +117,119 @@ const useStyle = makeStyles ({
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
-    }
+    },
+    ['@media only screen and (min-width :320px) and (max-width :480px)']:{
+        
+    box: {
+        width: '35vw',
+        height:'auto',
+        border:'1px solid  #E2E2E2',
+        display: 'flex',
+        // flexWrap:'wrap',
+        flexDirection:'column',
+        justifyContent:'space-between',
+        alignContent:'space-between',
+        backgroundColor:'#F5F5F5',
+       
+    },
+    notes:{
+        width:'85%',
+        height:'90px',
+        // border:'1px solid red',
+        display:'flex',
+        flexDirection:'column',
+        // flexWrap:'wrap',
+        justifyContent:'space-between',
+        alignItems:'flex-start',
+        backgroundColor:'#FFFFFF',
+        padding:'10px',
+    },
+
+    },
+    ['@media only screen and (min-width :481px) and (max-width :768px)']:{
+        
+        box: {
+            width: '35vw',
+            height:'auto',
+            border:'1px solid  #E2E2E2',
+            display: 'flex',
+            // flexWrap:'wrap',
+            flexDirection:'column',
+            justifyContent:'space-between',
+            alignContent:'space-between',
+            backgroundColor:'#F5F5F5',
+           
+        },
+        notes:{
+            width:'89%',
+            height:'90px',
+            // border:'1px solid red',
+            display:'flex',
+            flexDirection:'column',
+            // flexWrap:'wrap',
+            justifyContent:'space-between',
+            alignItems:'flex-start',
+            backgroundColor:'#FFFFFF',
+            padding:'10px',
+        },
+    
+        },
+        ['@media only screen and (min-width :769px) and (max-width :899px)']:{
+        
+            box: {
+                width: '35vw',
+                height:'auto',
+                border:'1px solid  #E2E2E2',
+                display: 'flex',
+                // flexWrap:'wrap',
+                flexDirection:'column',
+                justifyContent:'space-between',
+                alignContent:'space-between',
+                backgroundColor:'#F5F5F5',
+               
+            },
+            notes:{
+                width:'93%',
+                height:'90px',
+                // border:'1px solid red',
+                display:'flex',
+                flexDirection:'column',
+                // flexWrap:'wrap',
+                justifyContent:'space-between',
+                alignItems:'flex-start',
+                backgroundColor:'#FFFFFF',
+                padding:'10px',
+            },
+        
+            },
+            ['@media only screen and (min-width :900px) and (max-width :1024px)']:{
+        
+                box: {
+                    width: '35vw',
+                    height:'auto',
+                    border:'1px solid  #E2E2E2',
+                    display: 'flex',
+                    // flexWrap:'wrap',
+                    flexDirection:'column',
+                    justifyContent:'space-between',
+                    alignContent:'space-between',
+                    backgroundColor:'#F5F5F5',
+                   
+                },
+                notes:{
+                    width:'94%',
+                    height:'90px',
+                    // border:'1px solid red',
+                    display:'flex',
+                    flexDirection:'column',
+                    // flexWrap:'wrap',
+                    justifyContent:'space-between',
+                    alignItems:'flex-start',
+                    backgroundColor:'#FFFFFF',
+                    padding:'10px',
+                },
+            
+                },
 })
 
 function Books(props) {

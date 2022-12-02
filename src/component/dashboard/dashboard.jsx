@@ -13,14 +13,18 @@ import Head from "../header/head"
 
 
 const useStyle = makeStyles({
-    head: {
-        // width:'100vw',
-        display:'flex',
-        flexDirection: 'column',
+    book:{
+        border:'0px solid  #E2E2E2',
+        width:'70vw', 
+        height:'120vh', 
+        display:'flex', 
         flexWrap:'wrap',
         justifyContent:'space-between',
-        alignContent:'space-between',
-        alignItems:'flex-start',
+        alignContent:'space-between', 
+        alignItem:'center', 
+        position:'relative',
+        left:'15%',
+
     },
     pagenation:{
         display:'flex',
@@ -28,7 +32,63 @@ const useStyle = makeStyles({
         justifyContent:'center',
         alignContent:'center',
         alignItems:'center',
-    }
+    },
+    ['@media only screen and (min-width :320px) and (max-width :480px)']:{
+        book:{
+            border:'0px solid  #E2E2E2',
+            width:'80vw', 
+            height:'210vh', 
+            display:'flex', 
+            flexWrap:'wrap',
+            justifyContent:'space-between',
+            alignContent:'space-between', 
+            alignItem:'start', 
+            position:'relative',
+            left:'10%',
+        },
+    },
+    ['@media only screen and (min-width :481px) and (max-width :768px)']:{
+        book:{
+            border:'0px solid  #E2E2E2',
+            width:'80vw', 
+            height:'290vh', 
+            display:'flex', 
+            flexWrap:'wrap',
+            justifyContent:'space-between',
+            alignContent:'space-between', 
+            alignItem:'start', 
+            position:'relative',
+            left:'10%',
+        },
+    },
+    ['@media only screen and (min-width :769px) and (max-width :899px)']:{
+        book:{
+            border:'0px solid  #E2E2E2',
+            width:'80vw', 
+            height:'330vh', 
+            display:'flex', 
+            flexWrap:'wrap',
+            justifyContent:'space-between',
+            alignContent:'space-between', 
+            alignItem:'start', 
+            position:'relative',
+            left:'10%',
+        },
+    },
+    ['@media only screen and (min-width :900px) and (max-width :1024px)']:{
+        book:{
+            border:'0px solid  #E2E2E2',
+            width:'80vw', 
+            height:'360vh', 
+            display:'flex', 
+            flexWrap:'wrap',
+            justifyContent:'space-between',
+            alignContent:'space-between', 
+            alignItem:'start', 
+            position:'relative',
+            left:'10%',
+        },
+    },
    
 })
 function Dashboard() {
@@ -87,8 +147,8 @@ function Dashboard() {
             {
                 toggle ? <Book01 listenToBook01={listenToBook01} id={detail._id} name={detail.bookName} author={detail.author}
                 quantity={detail.quantity} price={detail.price} discountPrice={detail.discountPrice} /> : 
-             <div  style={{border:'0px solid red',width:'70vw', height:'120vh', display:'flex', flexWrap:'wrap', justifyContent:'space-between',
-                            alignContent:'space-between', alignItem:'center', position:'relative',left:'230px'}} >
+             <div className={classes.book} /*style={{border:'0px solid red',width:'70vw', height:'120vh', display:'flex', flexWrap:'wrap', justifyContent:'space-between',
+                            alignContent:'space-between', alignItem:'center', position:'relative',left:'230px'}}*/ >
             {
                 currentPosts.map((book) => (<div onClick={()=>{openBook01(book); setDetails(book)}}><Books book ={book} autorefresh={autorefresh} className={classes.bookhead}/></div>))
             }

@@ -33,10 +33,100 @@ import {useNavigate} from "react-router-dom";
 import {addToCart} from "../services/dataservices";
 import Head from "./head"
 
-
+const useStyle = makeStyles ({
+  texthead:{
+    width:'10%', 
+    height:'20%',
+    display:'flex',
+    justifyContent:'space-evenly', 
+    position: 'relative', 
+    left:'13%',
+    fontSize:'20px',
+    // border:'1px solid red',
+    
+  },
+  imagehead:{
+    width:'20%',
+  },
+  icon:{
+    display:"flex",
+    justifyContent:'space-between', 
+    position: 'relative' ,
+    right:'14%',
+     width:'15%',
+     border:'0px solid green' 
+  },
+  ['@media only screen and (min-width :320px) and (max-width :480px)']:{
+    texthead:{
+      width:'60%', 
+      height:'10%',
+      display:'flex',
+      justifyContent:'space-evenly', 
+      position: 'relative', 
+      left:'1%',
+      fontSize:'15px',
+      // border:'1px solid red',
+    },
+    icon:{
+      display:"none",
+    },
+  },
+  ['@media only screen and (min-width :481px) and (max-width :768px)']:{
+    texthead:{
+      width:'30%', 
+      height:'30%',
+      display:'flex',
+      justifyContent:'space-evenly', 
+      position: 'relative', 
+      left:'5%',
+      fontSize:'20px',
+      // border:'1px solid red',
+    },
+    icon:{
+      display:"none",
+    },
+  },
+  ['@media only screen and (min-width :769px) and (max-width :899px)']:{
+    texthead:{
+      width:'30%', 
+      height:'20%',
+      display:'flex',
+      justifyContent:'space-evenly', 
+      position: 'relative', 
+      left:'5%',
+      fontSize:'20px',
+      // border:'1px solid red',
+    },
+    imagehead:{
+      width:'15%',
+    },
+    icon:{
+      display:"none",
+    },
+  },
+  ['@media only screen and (min-width :900px) and (max-width :1024px)']:{
+    texthead:{
+      width:'20%', 
+      height:'10%',
+      display:'flex',
+      justifyContent:'space-evenly', 
+      position: 'relative', 
+      left:'5%',
+      fontSize:'20px',
+      // border:'1px solid red',
+    },
+    imagehead:{
+      width:'15%',
+    },
+    icon:{
+      position:'relative',
+      right:'10%'
+    }
+  },
+})
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    left: '200px' ,
+    left: '12%' ,
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -49,7 +139,31 @@ const Search = styled('div')(({ theme }) => ({
     color:'#9D9D9D',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
-      width: '600px',
+      width: '38vw',
+    },
+    ['@media only screen and (min-width :320px) and (max-width :480px)']:{
+      width: '58vw',
+      // border:'1px solid red',
+      position: 'relative',
+      left: '5%' ,
+    },
+    ['@media only screen and (min-width :481px) and (max-width :768px)']:{
+      width: '40%',
+      // border:'1px solid red',
+      position: 'relative',
+      left: '6%' ,
+    },
+    ['@media only screen and (min-width :769px) and (max-width :899px)']:{
+      width: '35%',
+      // border:'1px solid red',
+      position: 'relative',
+      left: '5%' ,
+    },
+    ['@media only screen and (min-width :900px) and (max-width :1024px)']:{
+      width: '35%',
+      // border:'1px solid red',
+      position: 'relative',
+      left: '2%' ,
     },
   }));
   
@@ -63,6 +177,10 @@ const Search = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor:'#FCFCFC',
+    ['@media only screen and (min-width :481px) and (max-width :768px)']:{
+      zIndex:'1',
+    }
+    
     
   }));
   
@@ -76,16 +194,43 @@ const Search = styled('div')(({ theme }) => ({
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.up('md')]: {
-        width: '500px',
+        width: '32vw',
         position:'relative',
-        left:'20px',
+        left:'4%',
         borderRadius:"2px",
+        
       },
-    },
+      ['@media only screen and (min-width :320px) and (max-width :480px)']:{
+        width: '80%',
+        // border:'1px solid red',
+        position:'relative',
+        left:'1%',
+      },
+      ['@media only screen and (min-width :481px) and (max-width :768px)']:{
+        width: '80%',
+        // border:'1px solid red',
+        position:'relative',
+        left:'10%',
+      },
+      ['@media only screen and (min-width :769px) and (max-width :899px)']:{
+        width: '100%',
+        // border:'1px solid red',
+        position:'relative',
+        left:'13%',
+      },
+      ['@media only screen and (min-width :900px) and (max-width :1024px)']:{
+        width: '30vw',
+        // border:'1px solid red',
+        position:'relative',
+        left:'13%',
+      }
+  },
+    
   }));
 
 function Header(props) {
   const navigate = useNavigate()
+  const classes = useStyle();
   const [sort, setSort] = React.useState('');
   const [wishlist, setwishlist] = useState([]);
   const [detail, setDetails]=useState({});
@@ -126,6 +271,7 @@ useEffect(() =>{
     setSort(event.target.value);
   };
 
+
     return (
       <Box>
         <Box sx={{ flexGrow: 1 , width:'100vw'}}>
@@ -133,13 +279,12 @@ useEffect(() =>{
           <Toolbar sx={{backgroundColor:'#A03037'}}>
           
             <Typography
-              variant="h6"
+              variant=""
               noWrap
               component="div"
-              sx={{ display: { xs: 'none', sm: 'flex' },width:'150px',
-              justifyContent:'space-evenly', position: 'relative', left:'190px' }}
+              className={classes.texthead}
             >   
-             <img src={img} alt="img"  sx={{ width:'30px', height:'20px', position:'relative', right:'50px'}}/>
+             <img  src={img} alt="img"  className={classes.imagehead}  />
               Bookstore
             </Typography>
             <Search>
@@ -152,7 +297,7 @@ useEffect(() =>{
               />
             </Search>
             <Box sx={{ flexGrow: 1, }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent:'space-between', position: 'relative' , right: '200px', width:'250px',border:'0px solid green'  }}>
+            <Box className={classes.icon} >
               <Button size="extra-large" aria-label="show 4 new mails" variant="contained"  color="inherit" sx={{backgroundColor:'#A03037'}}>
                   <PermIdentityOutlinedIcon sx={{ fontSize: 30  }} />
               </Button>
